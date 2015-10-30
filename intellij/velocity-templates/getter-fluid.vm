@@ -1,0 +1,14 @@
+public ##
+#if($field.modifierStatic)
+  static ##
+#end
+$field.type ##
+#set($name = $StringUtil.decapitalize($StringUtil.capitalize($StringUtil.sanitizeJavaIdentifier($helper.getPropertyName($field, $project)))))
+#if ($field.boolean && $field.primitive)
+  #if ($StringUtil.startsWithIgnoreCase($name, 'is'))
+    #set($name = $StringUtil.decapitalize($name))
+  #end
+#end
+${name}() {
+  return $field.name;
+}
